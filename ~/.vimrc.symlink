@@ -1,0 +1,83 @@
+execute pathogen#infect()
+
+set nocompatible
+set number
+set nojoinspaces
+
+set ch=1
+set tabstop=4
+set shiftwidth=4
+
+set smartindent
+
+set autowrite
+set confirm
+set viminfo='50,\"500
+set history=50
+
+set nocp
+filetype plugin on
+
+set expandtab
+autocmd FileType make setlocal noexpandtab
+
+syn on
+set hidden
+
+" show foldcolumn when some folds are present
+function HasFoldedLine() 
+    let lnum=1 
+    while lnum <= line("$") 
+        if (foldclosed(lnum) > -1) 
+            return 1 
+        endif 
+        let lnum+=1 
+    endwhile 
+    return 0 
+endfunction
+
+autocmd CursorHold * if HasFoldedLine() == 1 | set foldcolumn=2 | else | set foldcolumn=0 | endif 
+
+" miniBufExpl settings
+let g:miniBufExplUseSingleClick = 1
+let g:miniBufExplorerMoreThanOne = 1
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplSplitToEdge = 0
+
+" move to previous buffer
+noremap <C-j> :MBEbp<cr>
+" move to next buffer
+noremap <C-k> :MBEbn<cr>
+" close current buffer
+noremap <C-c> :MBEbd<cr>
+" jump to NERDTree file browser
+noremap <C-f> <C-w>t
+" reopen miniBufExpl and NERDTree
+noremap <F2> :MBEOpenAll<cr>:NERDTreeTabsOpen<cr>
+
+" neocomplcache settings
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_enable_camel_case_completion = 1
+let g:neocomplcache_enable_underbar_completion = 1
+let g:neocomplcache_min_syntax_length = 0
+let g:neocomplcache_enable_auto_select = 1
+
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+autocmd BufNewFile,BufRead *.pegjs setfiletype pegjs
+
+autocmd BufNewFile,BufRead *.latte set syntax=smarty
+autocmd BufNewFile,BufRead *.fx set syntax=java
+autocmd BufNewFile,BufRead *.tdef set syntax=cpp
+autocmd BufNewFile,BufRead *.cls set syntax=tex
+autocmd BufNewFile,BufRead *.clo set syntax=tex
+autocmd BufNewFile,BufRead *.tpp set syntax=cpp
+autocmd BufNewFile,BufRead *.jison set syntax=lex
+" autocmd BufNewFile,BufRead *.styl set syntax=css
+
+let g:templates_no_autocmd = 1

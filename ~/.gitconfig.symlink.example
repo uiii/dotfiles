@@ -1,0 +1,34 @@
+[user]
+	email = GIT_EMAIL
+	name = GIT_NAME
+[alias]
+	st = status --column
+
+[color]
+    branch = auto
+    diff = auto
+    status = auto
+
+[color "branch"]
+    current = green
+    local = white
+    remote = yellow
+
+[color "status"]
+    added = green
+    changed = red
+    untracked = yellow
+[core]
+	editor = vim
+
+[difftool.latex]
+    cmd = latexdiff -e utf8 "$LOCAL" "$REMOTE"
+[difftool]
+    prompt = false
+[alias]
+    ldiff = difftool -t latex
+
+[diff]
+    tool = meld
+[merge]
+    tool = meld
