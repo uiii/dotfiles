@@ -1,0 +1,104 @@
+#!/usr/bin/env bash
+
+DOTFILES_ROOT="`pwd`"
+BACKUP_DIR=${DOTFILES_ROOT}/.backup/~
+GITCONFIG_FILE=${DOTFILES_ROOT}/~/.gitconfig.symlink
+
+set -e
+
+info () {
+    printf "  [ \033[00;34m>>\033[0m ] $1\n"
+}
+
+user () {
+    printf "\r  [ \033[0;33m??\033[0m ] $1 "
+}
+
+success () {
+    printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"
+}
+
+fail () {
+    printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n"
+    echo ''
+    exit
+}
+
+setup_gitconfig () {
+    if ! [ -f ${GITCONFIG_FILE} ]; then
+        echo ''
+        info "setup .gitconfig"
+
+        git_credential='cache'
+
+        user ' - What is your github author name?'
+        read -e git_name
+        user ' - What is your github author email?'
+        read -e git_email
+
+        sed -e "s/GIT_NAME/$git_name/g" -e "s/GIT_EMAIL/$git_email/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" ${GITCONFIG_FILE}.example > ${GITCONFIG_FILE}
+
+        success "created ${GITCONFIG_FILE}"
+    fi
+}
+
+link_files () {
+    ln -s $1 $2
+    success "linked $1 to $2"
+}
+
+install_dotfiles () {
+    echo ''
+    info 'installing dotfiles'
+
+    if ! [ -d $BACKUP_DIR ]; then
+        mkdir -p $BACKUP_DIR
+    fi
+
+    for source in `find $DOTFILES_ROOT -name \*.symlink ! -wholename '*.symlink/*'`
+    do
+        relativeSource=${source/"$DOTFILES_ROOT/~/"/}
+        relativeDestination=${relativeSource%.*}
+
+        destination=$HOME/$relativeDestination
+
+        echo ''
+        info "installing $destination"
+
+        if [ -f $destination ] || [ -d $destination ]; then
+            # destination already exists
+
+            sourceInode=$(stat -L -c %d:%i $source)
+            destinationInode=$(stat -L -c %d:%i $destination)
+
+            # check if destination is already a symlink to the source
+            if [ -L $destination ] && [ "$sourceInode" == "$destinationInode" ]; then
+                success "already installed"
+                continue
+            fi
+
+            # back up destination
+            backup=$BACKUP_DIR/${relativeDestination}.backup
+
+            cp -rd $destination $backup
+            rm -r $destination
+
+            success "backed up $destination"
+
+            # make destination a symlink to the source
+            ln -s $source $destination
+            success "linked $destination to $source"
+        else
+            # destination doesn't exist
+
+            ln -s $source $destination
+            success "linked $destination to $source"
+        fi
+    done
+}
+
+setup_gitconfig
+install_dotfiles
+
+echo ''
+echo '  All installed!'
