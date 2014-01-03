@@ -1,0 +1,30 @@
+[submodule "~/.vim.symlink/bundle/neocomplcache"]
+	path = ~/.vim.symlink/bundle/neocomplcache
+	url = https://github.com/Shougo/neocomplcache.git
+[submodule "~/.vim.symlink/bundle/pegjs-vim"]
+	path = ~/.vim.symlink/bundle/pegjs-vim
+	url = https://github.com/alunny/pegjs-vim
+[submodule "~/.vim.symlink/bundle/tagbar"]
+	path = ~/.vim.symlink/bundle/tagbar
+	url = https://github.com/majutsushi/tagbar
+[submodule "~/.vim.symlink/bundle/vim-colors-solarized"]
+	path = ~/.vim.symlink/bundle/vim-colors-solarized
+	url = https://github.com/altercation/vim-colors-solarized.git
+[submodule "~/.vim.symlink/bundle/vim-javascript"]
+	path = ~/.vim.symlink/bundle/vim-javascript
+	url = https://github.com/pangloss/vim-javascript.git
+[submodule "~/.vim.symlink/bundle/vim-less"]
+	path = ~/.vim.symlink/bundle/vim-less
+	url = https://github.com/groenewege/vim-less
+[submodule "~/.vim.symlink/bundle/vim-nerdtree-tabs"]
+	path = ~/.vim.symlink/bundle/vim-nerdtree-tabs
+	url = https://github.com/jistr/vim-nerdtree-tabs.git
+[submodule "~/.vim.symlink/bundle/vim-plugin-minibufexpl"]
+	path = ~/.vim.symlink/bundle/vim-plugin-minibufexpl
+	url = https://github.com/techlivezheng/vim-plugin-minibufexpl.git
+[submodule "~/.vim.symlink/bundle/vim-stylus"]
+	path = ~/.vim.symlink/bundle/vim-stylus
+	url = https://github.com/wavded/vim-stylus.git
+[submodule "~/.vim.symlink/bundle/vim-template"]
+	path = ~/.vim.symlink/bundle/vim-template
+	url = https://github.com/aperezdc/vim-template.git
