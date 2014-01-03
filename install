@@ -55,7 +55,7 @@ install_dotfiles () {
         mkdir -p $BACKUP_DIR
     fi
 
-    for source in `find $DOTFILES_ROOT -name \*.symlink ! -wholename '*.symlink/*'`
+    for source in `find $DOTFILES_ROOT/~ -name \*.symlink ! -wholename '*.symlink/*'`
     do
         relativeSource=${source/"$DOTFILES_ROOT/~/"/}
         relativeDestination=${relativeSource%.*}
