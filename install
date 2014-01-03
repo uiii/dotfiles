@@ -84,12 +84,22 @@ install_dotfiles () {
                 rm -rf $backup
             fi
 
+            backupDir=`dirname $backup`
+            if ! [ -e $backupDir ]; then
+                mkdir -p $backupDir
+            fi
+
             cp -rd $destination $backup
             rm -rf $destination
 
             success "backed up $destination"
 
             # make destination a symlink to the source
+            destinationDir=`dirname $destination`
+            if ! [ -e $destinationDir ]; then
+                mkdir -p $destinationDir
+            fi
+
             ln -s $source $destination
             success "linked $destination to $source"
         else
