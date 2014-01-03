@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -x
+#set -x
 
 function processFile {
     #grep -IHEn $1 "$2" $3 | cut -c -256
