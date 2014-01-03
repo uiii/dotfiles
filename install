@@ -80,8 +80,12 @@ install_dotfiles () {
             # back up destination
             backup=$BACKUP_DIR/${relativeDestination}.backup
 
+            if [ -e $backup ]; then
+                rm -rf $backup
+            fi
+
             cp -rd $destination $backup
-            rm -r $destination
+            rm -rf $destination
 
             success "backed up $destination"
 
