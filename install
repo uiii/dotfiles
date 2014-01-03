@@ -42,9 +42,18 @@ setup_gitconfig () {
     fi
 }
 
-link_files () {
-    ln -s $1 $2
-    success "linked $1 to $2"
+symlink () {
+    source=$1
+    destination=$2
+
+    # create destination parent directory if needed
+    destinationDir=`dirname $destination`
+    if ! [ -e $destinationDir ]; then
+        mkdir -p $destinationDir
+    fi
+
+    ln -s $source $destination
+    success "linked $destination to $source"
 }
 
 install_dotfiles () {
@@ -65,9 +74,8 @@ install_dotfiles () {
         echo ''
         info "installing $destination"
 
+        # backup destination if already exists
         if [ -f $destination ] || [ -d $destination ]; then
-            # destination already exists
-
             sourceInode=$(stat -L -c %d:%i $source)
             destinationInode=$(stat -L -c %d:%i $destination)
 
@@ -93,21 +101,10 @@ install_dotfiles () {
             rm -rf $destination
 
             success "backed up $destination"
-
-            # make destination a symlink to the source
-            destinationDir=`dirname $destination`
-            if ! [ -e $destinationDir ]; then
-                mkdir -p $destinationDir
-            fi
-
-            ln -s $source $destination
-            success "linked $destination to $source"
-        else
-            # destination doesn't exist
-
-            ln -s $source $destination
-            success "linked $destination to $source"
         fi
+
+        # make destination a symlink to the source
+        symlink $source $destination
     done
 }
 
