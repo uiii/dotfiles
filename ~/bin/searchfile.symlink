@@ -1,0 +1,31 @@
+#!/bin/bash
+
+set -x
+
+function processFile {
+    #grep -IHEn $1 "$2" $3 | cut -c -256
+    #grep -IHEn $1 "$2" $3 | sed -e "s/\($2\)/\x1b[0;30m\x1b[43m\1\x1b[0m/g" | cut -c -256
+
+    if [[ "$1" == *-i* ]]
+    then
+        sedOptions='I' # case-insensitive
+    fi
+
+    grep -IHEn $1 "$2" $3 | sed -e "s/\($2\)/\x1b[0;33m\1\x1b[0m/${sedOptions}g" | cut -c -500
+}
+
+export -f processFile
+
+if [ $# -lt 1 ]
+then
+	echo "usage: searchfile [<grep-options> ...] <search-string>"
+else
+    options=""
+    while [ $# -gt 1 ]
+    do
+        options="$options $1"
+        shift 1;
+    done
+    text="$1"
+	find . -type f -exec bash -c "processFile \"$options\" \"$text\" \$0" {} \;
+fi
