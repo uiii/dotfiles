@@ -34,3 +34,5 @@
 *.foreground: #DDDDDD
 
 !*.font: xft:Terminus:pixelsize=13
+
+Xterm*saveLines: 4096
