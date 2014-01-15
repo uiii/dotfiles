@@ -1,3 +1,4 @@
 *.swp
 .backup
 ~/.gitconfig.symlink
+~/.config/Thunar.symlink/accels.scm
