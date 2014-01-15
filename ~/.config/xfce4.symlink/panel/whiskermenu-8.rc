@@ -1,0 +1,22 @@
+button-icon=/usr/share/icons/manjaro.png
+launcher-show-name=true
+launcher-show-description=true
+favorites=exo-terminal-emulator.desktop,exo-file-manager.desktop,exo-web-browser.desktop,pamac-manager.desktop
+recent=pidgin.desktop,xfce4-mime-settings.desktop,xfce4-settings-editor.desktop,firefox.desktop,playonlinux.desktop,gajim.desktop,skype.desktop,xfce-settings-manager.desktop,filezilla.desktop,gcolor2.desktop
+menu-width=400
+menu-height=519
+button-title=Menu Aplikací
+show-button-title=false
+show-button-icon=true
+hover-switch-category=false
+category-icon-size=0
+item-icon-size=2
+load-hierarchy=true
+favorites-in-recent=true
+display-recent-default=false
+position-search-alternate=true
+position-commands-alternate=true
+command-settings=xfce4-settings-manager
+command-lockscreen=xflock4
+command-logout=xfce4-session-logout
+
