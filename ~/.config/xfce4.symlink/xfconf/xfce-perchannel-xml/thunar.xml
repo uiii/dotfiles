@@ -39,5 +39,8 @@
   <property name="hidden-devices" type="array">
     <value type="string" value="8C3C0D613C0D4822"/>
     <value type="string" value="46343f13-aaf9-4e24-aace-6b92e59d6a9c"/>
+    <value type="string" value="98d6ec06-c437-46ca-8275-ac857f9ea6e7"/>
+    <value type="string" value="ebe205e7-1946-40f6-b17a-53025602a35d"/>
+    <value type="string" value="3B0D61861AA683ED"/>
   </property>
 </channel>
