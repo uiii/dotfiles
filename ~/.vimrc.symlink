@@ -78,6 +78,7 @@ autocmd BufNewFile,BufRead *.cls set syntax=tex
 autocmd BufNewFile,BufRead *.clo set syntax=tex
 autocmd BufNewFile,BufRead *.tpp set syntax=cpp
 autocmd BufNewFile,BufRead *.jison set syntax=lex
+autocmd BufNewFile,BufRead *.phpt set syntax=php
 " autocmd BufNewFile,BufRead *.styl set syntax=css
 
 let g:templates_no_autocmd = 1

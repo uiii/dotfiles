@@ -2,6 +2,8 @@
 # ~/.bashrc
 #
 
+source /usr/share/git/completion/git-prompt.sh
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -33,14 +35,15 @@ PS1="╭┤${status}├─┤${user}├─┤${path}├◑\n╰◑ ${prompt}"
 #PS1="${status}-${info}\n${prompt}"
 }
 
-prompt_command2 () {
+function prompt_command2() {
     local ret=$?
     local w="`echo "${PWD/#$HOME/~}"`"
     local W="`basename "${w}"`"
 
-    local L=30
-    [ ${#w} -gt $L ] \
-        && local path="\[\033[0;36m\]${w:0:$((30 - ${#W} - 1))}\[\033[0;34m\]…\[\033[0;36m\]/${W}\[\033[0m\]" \
+    local width=`tput cols`
+    local padding=3
+    [ ${#w} -gt $width ] \
+        && local path="\[\033[0;36m\]${w:0:$((${width} - ${#W} - 2 - ${padding}))}\[\033[0;34m\]…\[\033[0;36m\]/${W}\[\033[0m\]" \
         || local path="\[\033[0;36m\]${w}\[\033[0m\]"
 
     local error=""
@@ -48,7 +51,8 @@ prompt_command2 () {
 
     local prompt="\[\033[1;30m\]>\[\033[0;32m\]>\[\033[1;32m\]>\[\033[m\]"
 
-    PS1="${error}${path} ${prompt} "
+    PS1="${error}$1${path}\n$(__git_ps1 "(%s) ")${prompt} "
+    PROMPT_COMMAND="prompt_command2 '\n'"
 }
 
 PROMPT_COMMAND=prompt_command2
