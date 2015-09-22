@@ -3,6 +3,7 @@
 #
 
 source /usr/share/git/completion/git-prompt.sh
+GIT_PS1_SHOWSTASHSTATE=true
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -13,6 +14,8 @@ alias pm-suspend='sudo pm-suspend && sudo netcfg -r uwifi'
 alias gitk='gitk --all &'
 alias xinit='startx'
 alias xinit-normal='xinit'
+alias php-http='sudo -u http php'
+alias sc='sudo systemctl'
 
 #✓✔✕✖✗✘✙✚✛✜✝✞✟╭├╭╰─
 
@@ -61,3 +64,8 @@ export EDITOR="gvim"
 
 # resize terminal content according to window size
 shopt -s checkwinsize
+
+# added by travis gem
+[ -f /home/uiii/.travis/travis.sh ] && source /home/uiii/.travis/travis.sh
+
+export PATH=~/.composer/vendor/bin:$PATH

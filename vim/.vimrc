@@ -18,26 +18,25 @@ set history=50
 set nocp
 filetype plugin on
 
+set expandtab
 autocmd FileType make setlocal noexpandtab
 
 syn on
 set hidden
 
-set nofoldenable
-
 " show foldcolumn when some folds are present
-"function HasFoldedLine() 
-    "let lnum=1 
-    "while lnum <= line("$") 
-        "if (foldclosed(lnum) > -1) 
-            "return 1 
-        "endif 
-        "let lnum+=1 
-    "endwhile 
-    "return 0 
-"endfunction
+function HasFoldedLine() 
+    let lnum=1 
+    while lnum <= line("$") 
+        if (foldclosed(lnum) > -1) 
+            return 1 
+        endif 
+        let lnum+=1 
+    endwhile 
+    return 0 
+endfunction
 
-"autocmd CursorHold * if HasFoldedLine() == 1 | set foldcolumn=2 | else | set foldcolumn=0 | endif 
+autocmd CursorHold * if HasFoldedLine() == 1 | set foldcolumn=2 | else | set foldcolumn=0 | endif 
 
 " miniBufExpl settings
 let g:miniBufExplUseSingleClick = 1
@@ -53,12 +52,8 @@ noremap <C-k> :MBEbn<cr>
 noremap <C-c> :MBEbd<cr>
 " jump to NERDTree file browser
 noremap <C-f> <C-w>t
-" jump to Taglist file browser
-noremap <C-g> <C-w>l
 " reopen miniBufExpl and NERDTree
 noremap <F2> :MBEOpenAll<cr>:NERDTreeTabsOpen<cr>
-" reopen Taglist to resize buffer window
-noremap <F7> :TlistClose<cr>:TlistOpen<cr>
 
 " neocomplcache settings
 let g:neocomplcache_enable_at_startup = 1
@@ -83,15 +78,6 @@ autocmd BufNewFile,BufRead *.cls set syntax=tex
 autocmd BufNewFile,BufRead *.clo set syntax=tex
 autocmd BufNewFile,BufRead *.tpp set syntax=cpp
 autocmd BufNewFile,BufRead *.jison set syntax=lex
-autocmd BufNewFile,BufRead *.phpt set syntax=php
 " autocmd BufNewFile,BufRead *.styl set syntax=css
 
 let g:templates_no_autocmd = 1
-
-let g:Tlist_Use_Right_Window = 1
-let g:Tlist_Enable_Fold_Column = 0
-let g:Tlist_Show_One_File = 1
-let g:Tlist_Exit_OnlyWindow = 1
-let tlist_php_settings='php;c:classes;f:functions' 
-
-autocmd BufWritePost * TlistUpdate

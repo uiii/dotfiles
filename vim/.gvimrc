@@ -17,5 +17,4 @@ set lines=50
 set columns=150
 
 autocmd VimEnter * NERDTreeTabsOpen
-autocmd VimEnter * TlistToggle
 "autocmd VimEnter * wincmd p

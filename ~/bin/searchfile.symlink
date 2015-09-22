@@ -3,6 +3,8 @@
 #set -x
 
 function processFile {
+    #set -x
+    
     #grep -IHEn $1 "$2" $3 | cut -c -256
     #grep -IHEn $1 "$2" $3 | sed -e "s/\($2\)/\x1b[0;30m\x1b[43m\1\x1b[0m/g" | cut -c -256
 
@@ -10,6 +12,8 @@ function processFile {
     then
         sedOptions='I' # case-insensitive
     fi
+
+    #echo "$1 $2 $3"
 
     grep -IHEn $1 "$2" $3 | sed -e "s/\($2\)/\x1b[0;33m\1\x1b[0m/${sedOptions}g" | cut -c -500
 }
